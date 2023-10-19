@@ -2,7 +2,6 @@ package com.lissenok88.bank.account.repository;
 
 import com.lissenok88.bank.account.error.NotFoundException;
 import com.lissenok88.bank.account.model.Account;
-import com.lissenok88.bank.account.to.AccountTo;
 import com.lissenok88.bank.account.util.Util;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

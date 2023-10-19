@@ -1,6 +1,7 @@
 package com.lissenok88.bank.account.model;
 
 import com.lissenok88.bank.account.HasId;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
@@ -17,7 +18,7 @@ import org.springframework.util.Assert;
 public abstract class BaseEntity implements Persistable<Long>, HasId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Schema(hidden = true)
+    @Schema(hidden = true)
     protected Long id;
 
     // doesn't work for hibernate lazy proxy

@@ -27,9 +27,7 @@ import static com.lissenok88.bank.account.util.ValidationUtil.checkNew;
 @RequiredArgsConstructor
 public class AccountController {
     public static final String REST_URL = "/api/account";
-    //@Autowired
     private AccountRepository accountRepository;
-    //@Autowired
     private AccountMapper accountMapper;
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.lissenok88.bank.account.to;
 
 import com.lissenok88.bank.account.HasId;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 public abstract class BaseTo implements HasId {
-    //@Schema(hidden = true)
+    @Schema(hidden = true)
     protected Long id;
 
     @Override
