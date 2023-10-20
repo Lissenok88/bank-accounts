@@ -22,18 +22,23 @@ import java.util.Map;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
-/*@Configuration
+@Configuration
 @Slf4j
 //@EnableCaching
 public class AppConfig {
 
-    @Bean
-    Module module() {
-        return new Hibernate5Module();
+    //    https://stackoverflow.com/a/74630129/548473
+    @JsonAutoDetect(fieldVisibility = NONE, getterVisibility = ANY)
+    interface MixIn {
+        @JsonAnyGetter
+        Map<String, Object> getProperties();
     }
 
     @Autowired
-    public void storeObjectMapper(@Lazy ObjectMapper objectMapper) {
+    void configureAndStoreObjectMapper(ObjectMapper objectMapper) {
+        objectMapper.registerModule(new Hibernate5JakartaModule());
+        // https://stackoverflow.com/questions/7421474/548473
+        objectMapper.addMixIn(ProblemDetail.class, MixIn.class);
         JsonUtil.setMapper(objectMapper);
     }
-}*/
+}

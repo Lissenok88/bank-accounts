@@ -17,7 +17,7 @@ public class AccountTo extends BaseTo {
     @NotBlank
     private int pin;
 
-    public AccountTo(long id, String name, long balance, int pin) {
+    public AccountTo(Long id, String name, long balance, int pin) {
         super(id);
         this.name = name;
         this.balance = balance;

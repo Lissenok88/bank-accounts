@@ -78,7 +78,6 @@ public class AccountController {
     @GetMapping
     public List<AccountTo> getAll() {
         log.info("getAll");
-        return accountMapper.toToList(accountRepository.getAll());
-        //return accountRepository.getAll();
+        return accountMapper.toToList(accountRepository.findAll());
     }
 }

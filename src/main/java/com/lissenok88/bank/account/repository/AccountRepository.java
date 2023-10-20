@@ -9,8 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Repository
 @Transactional(readOnly = true)
 public interface AccountRepository extends JpaRepository<Account, Long> {
@@ -19,9 +17,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Modifying
     @Query("DELETE FROM #{#entityName} e WHERE e.id=:id")
     int delete(long id);
-
-    @Query("SELECT a FROM Account a")
-    List<Account> getAll();
 
     //  https://stackoverflow.com/a/60695301/548473 (existed delete code 204, not existed: 404)
     default void deleteExisted(long id) {

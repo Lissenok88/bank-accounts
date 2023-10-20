@@ -24,9 +24,9 @@ import org.springframework.context.annotation.Configuration;
                 description = "Bank Account Application",
                 contact = @Contact(name = "Lyudmila Ivanyuk", email = "sony_2004@mail.ru")
         ),
-        servers = {
+/*        servers = {
                 @Server(url = "${app.host-url}")
-        },
+        },*/
         security = @SecurityRequirement(name = "basicAuth")
 )
 @Configuration
