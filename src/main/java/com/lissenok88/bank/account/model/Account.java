@@ -21,13 +21,13 @@ public class Account extends BaseEntity {
 
     @Column(name = "balance", nullable = false)
     @NotBlank
-    private long balance;
+    private Long balance;
 
     @Column(name = "pin", nullable = false)
     @NotBlank
     private String pin;
 
-    public Account(long id, String name, Long balance, String pin) {
+    public Account(Long id, String name, Long balance, String pin) {
         super(id);
         this.name = name;
         this.balance = balance;

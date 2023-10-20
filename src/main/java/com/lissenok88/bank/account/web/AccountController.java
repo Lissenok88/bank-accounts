@@ -37,11 +37,12 @@ public class AccountController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public ResponseEntity<Account> createWithLocation(@Valid @RequestBody AccountTo accountTo) {
+    public ResponseEntity<Account> createWithLocation(@Valid @RequestBody AccountTo accountTo, @RequestParam String pin) {
         log.info("create account {}", accountTo);
         checkNew(accountTo);
-        checkPin(accountTo.getPin());
-        Account created = accountRepository.save(accountMapper.toEntity(accountTo));
+        checkPin(pin);
+
+        Account created = accountRepository.save(new Account(null, accountTo.getName(), 0L, pin));
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
@@ -53,10 +54,12 @@ public class AccountController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    public void update(@Valid @RequestBody AccountTo accountTo, @PathVariable int id) {
+    public void update(@Valid @RequestBody AccountTo accountTo, @PathVariable int id, @PathVariable String pin) {
         log.info("update account {} with id={}", accountTo, id);
-        checkPin(accountTo.getPin());
+        checkPin(pin);
         assureIdConsistent(accountTo, id);
+        Account account = accountRepository.getExisted(id);
+        equalPins(pin, account.getPin());
         accountRepository.save(accountMapper.toEntity(accountTo));
     }
 

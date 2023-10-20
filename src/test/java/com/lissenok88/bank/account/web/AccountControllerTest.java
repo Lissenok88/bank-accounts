@@ -18,6 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AccountControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AccountController.REST_URL;
+    private static final String PIN_NUMBER = "3333";
+    private static final String NAME_PIN = "pin";
 
     @Autowired
     public AccountRepository accountRepository;
@@ -27,7 +29,7 @@ class AccountControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(ACCOUNT_TO_MATCHER.contentJson(ACCOUNT1, ACCOUNT2));
+                .andExpect(ACCOUNT_TO_MATCHER.contentJson(ACCOUNT_TO_1, ACCOUNT_TO_2));
 
     }
 
@@ -37,20 +39,21 @@ class AccountControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(ACCOUNT_TO_MATCHER.contentJson(ACCOUNT1));
+                .andExpect(ACCOUNT_TO_MATCHER.contentJson(ACCOUNT_TO_1));
     }
 
     @Test
     void createWithLocation() throws Exception {
         AccountTo newTo = getNew();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
+                .param(NAME_PIN, PIN_NUMBER)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(writeValue(newTo)))
                 .andExpect(status().isCreated());
 
         Account created = ACCOUNT_MATCHER.readFromJson(action);
         long newId = created.id();
-        Account newAccount = new Account(newId, newTo.getName(), newTo.getBalance(), newTo.getPin());
+        Account newAccount = new Account(newId, newTo.getName(), newTo.getBalance(), PIN_NUMBER);
         ACCOUNT_MATCHER.assertMatch(created, newAccount);
         ACCOUNT_MATCHER.assertMatch(accountRepository.getExisted(created.id()), newAccount);
     }

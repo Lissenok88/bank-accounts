@@ -12,15 +12,11 @@ public class AccountTo extends BaseTo {
     @NotBlank
     String name;
 
-    long balance;
+    Long balance;
 
-    @NotBlank
-    String pin;
-
-    public AccountTo(Long id, String name, long balance, String pin) {
+    public AccountTo(Long id, String name, Long balance) {
         super(id);
         this.name = name;
         this.balance = balance;
-        this.pin = pin;
     }
 }
