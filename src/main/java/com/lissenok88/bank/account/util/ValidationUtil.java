@@ -9,6 +9,9 @@ import org.springframework.lang.NonNull;
 
 @UtilityClass
 public class ValidationUtil {
+
+    public static final String PIN_ERROR_MESSAGE = "wrong pin code";
+
     public static void checkNew(HasId bean) {
         if (!bean.isNew()) {
             throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must be new (id=null)");
@@ -25,6 +28,12 @@ public class ValidationUtil {
 
     public static void checkPin(String pin) {
         if(pin.length() != 4 || !NumberUtils.isDigits(pin)) throw new IllegalArgumentException("PIN entered incorrectly");
+    }
+
+    public static void equalPins(String enteredPin, String accountPin) {
+        if(Integer.parseInt(enteredPin) != Integer.parseInt(accountPin)) {
+            throw new IllegalArgumentException(PIN_ERROR_MESSAGE);
+        }
     }
 
     public static void checkModification(int count, int id) {
