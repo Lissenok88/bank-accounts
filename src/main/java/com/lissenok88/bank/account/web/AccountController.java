@@ -54,7 +54,7 @@ public class AccountController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    public void update(@Valid @RequestBody AccountTo accountTo, @PathVariable int id, @PathVariable String pin) {
+    public void update(@Valid @RequestBody AccountTo accountTo, @PathVariable int id, @RequestParam String pin) {
         log.info("update account {} with id={}", accountTo, id);
         checkPin(pin);
         assureIdConsistent(accountTo, id);
@@ -74,8 +74,7 @@ public class AccountController {
     @Transactional
     public void delete(@PathVariable long id) {
         log.info("delete by id={}", id);
-        Account account = accountRepository.getExisted(id);
-        accountRepository.deleteExisted(account.id());
+        accountRepository.deleteExisted(id);
     }
 
     @GetMapping

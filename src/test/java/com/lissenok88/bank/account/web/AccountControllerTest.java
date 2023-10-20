@@ -1,13 +1,16 @@
 package com.lissenok88.bank.account.web;
 
 import com.lissenok88.bank.account.model.Account;
+import com.lissenok88.bank.account.model.AccountMapper;
 import com.lissenok88.bank.account.repository.AccountRepository;
 import com.lissenok88.bank.account.to.AccountTo;
+import com.lissenok88.bank.account.util.JsonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.lissenok88.bank.account.util.JsonUtil.writeValue;
 import static com.lissenok88.bank.account.web.AccountTestData.*;
@@ -23,6 +26,8 @@ class AccountControllerTest extends AbstractControllerTest {
 
     @Autowired
     public AccountRepository accountRepository;
+    @Autowired
+    public AccountMapper accountMapper;
 
     @Test
     void getAll() throws Exception {
@@ -43,6 +48,20 @@ class AccountControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    void update() throws Exception {
+        AccountTo updated = getUpdate();
+        perform(MockMvcRequestBuilders.put(REST_URL + "/" + ACCOUNT_ID)
+                .param(NAME_PIN, "5555")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        ACCOUNT_TO_MATCHER.assertMatch(accountMapper.toTo(accountRepository.getExisted(ACCOUNT_ID)), getUpdate());
+    }
+
+    @Test
+    @Transactional
     void createWithLocation() throws Exception {
         AccountTo newTo = getNew();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)

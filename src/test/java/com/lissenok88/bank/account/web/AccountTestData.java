@@ -20,4 +20,8 @@ public class AccountTestData {
         return new AccountTo(null,"Ketty", 0L);
     }
 
+    public static AccountTo getUpdate() {
+        return new AccountTo(ACCOUNT_ID,"Lyudmilka", ACCOUNT_TO_1.getBalance());
+    }
+
 }
