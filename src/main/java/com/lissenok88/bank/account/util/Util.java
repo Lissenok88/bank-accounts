@@ -2,7 +2,6 @@ package com.lissenok88.bank.account.util;
 
 import com.lissenok88.bank.account.error.NotFoundException;
 import lombok.experimental.UtilityClass;
-import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.Optional;
 

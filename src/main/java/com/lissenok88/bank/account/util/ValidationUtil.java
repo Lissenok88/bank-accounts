@@ -3,6 +3,7 @@ package com.lissenok88.bank.account.util;
 import com.lissenok88.bank.account.HasId;
 import com.lissenok88.bank.account.error.IllegalRequestDataException;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 
@@ -20,6 +21,10 @@ public class ValidationUtil {
         } else if (bean.id() != id) {
             throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must has id=" + id);
         }
+    }
+
+    public static void checkPin(String pin) {
+        if(pin.length() != 4 || !NumberUtils.isDigits(pin)) throw new IllegalArgumentException("PIN entered incorrectly");
     }
 
     public static void checkModification(int count, int id) {

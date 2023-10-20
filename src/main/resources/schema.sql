@@ -6,5 +6,5 @@ create table ACCOUNT
     ID          bigserial primary key,
     NAME        varchar(1024) not null,
     BALANCE     integer,
-    PIN         integer
+    PIN         varchar(1024) not null
 );

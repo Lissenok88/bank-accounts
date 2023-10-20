@@ -18,8 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static com.lissenok88.bank.account.util.ValidationUtil.assureIdConsistent;
-import static com.lissenok88.bank.account.util.ValidationUtil.checkNew;
+import static com.lissenok88.bank.account.util.ValidationUtil.*;
 
 @Slf4j
 @RestController
@@ -41,6 +40,7 @@ public class AccountController {
     public ResponseEntity<Account> createWithLocation(@Valid @RequestBody AccountTo accountTo) {
         log.info("create account {}", accountTo);
         checkNew(accountTo);
+        checkPin(accountTo.getPin());
         Account created = accountRepository.save(accountMapper.toEntity(accountTo));
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -56,6 +56,7 @@ public class AccountController {
     @Transactional
     public void update(@Valid @RequestBody AccountTo accountTo, @PathVariable int id) {
         log.info("update account {} with id={}", accountTo, id);
+        checkPin(accountTo.getPin());
         assureIdConsistent(accountTo, id);
         accountRepository.save(accountMapper.toEntity(accountTo));
     }

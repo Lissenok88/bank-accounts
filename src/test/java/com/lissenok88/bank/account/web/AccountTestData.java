@@ -10,11 +10,11 @@ public class AccountTestData {
 
     public static final long ACCOUNT_ID = 1L;
 
-    public static final AccountTo ACCOUNT1 = new AccountTo(ACCOUNT_ID, "Lyudmila", 155L, 5555);
-    public static final AccountTo ACCOUNT2 = new AccountTo(ACCOUNT_ID + 1, "Elena", 250L, 4444);
+    public static final AccountTo ACCOUNT1 = new AccountTo(ACCOUNT_ID, "Lyudmila", 155L, "5555");
+    public static final AccountTo ACCOUNT2 = new AccountTo(ACCOUNT_ID + 1, "Elena", 250L, "4444");
 
     public static AccountTo getNew() {
-        return new AccountTo(null,"Lyudmila", 250L,3333);
+        return new AccountTo(null,"Lyudmila", 250L,"3333");
     }
 
 }

@@ -25,9 +25,9 @@ public class Account extends BaseEntity {
 
     @Column(name = "pin", nullable = false)
     @NotBlank
-    private int pin;
+    private String pin;
 
-    public Account(long id, String name, Long balance, int pin) {
+    public Account(long id, String name, Long balance, String pin) {
         super(id);
         this.name = name;
         this.balance = balance;

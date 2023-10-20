@@ -11,13 +11,13 @@ import lombok.Value;
 @ToString
 public class AccountTo extends BaseTo {
     @NotBlank
-    private String name;
+    String name;
 
-    private long balance;
+    long balance;
     @NotBlank
-    private int pin;
+    String pin;
 
-    public AccountTo(Long id, String name, long balance, int pin) {
+    public AccountTo(Long id, String name, long balance, String pin) {
         super(id);
         this.name = name;
         this.balance = balance;
