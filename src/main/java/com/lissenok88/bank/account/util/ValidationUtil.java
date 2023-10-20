@@ -4,8 +4,6 @@ import com.lissenok88.bank.account.HasId;
 import com.lissenok88.bank.account.error.IllegalRequestDataException;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.springframework.core.NestedExceptionUtils;
-import org.springframework.lang.NonNull;
 
 @UtilityClass
 public class ValidationUtil {
@@ -40,11 +38,5 @@ public class ValidationUtil {
         if (count == 0) {
             throw new IllegalRequestDataException("Entity with id=" + id + " not found");
         }
-    }
-
-    @NonNull
-    public static Throwable getRootCause(@NonNull Throwable t) {
-        Throwable rootCause = NestedExceptionUtils.getRootCause(t);
-        return rootCause != null ? rootCause : t;
     }
 }

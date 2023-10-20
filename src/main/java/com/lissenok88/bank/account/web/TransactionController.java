@@ -28,7 +28,6 @@ public class TransactionController {
     public static final String DEPOSIT_OPERATION = "deposit account";
     public static final String WITHDRAW_OPERATION = "withdraw account";
     public static final String TRANSFER_OPERATION = "transfer to ";
-
     private AccountRepository accountRepository;
     private TransactionRepository transactionRepository;
 

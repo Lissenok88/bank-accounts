@@ -15,3 +15,5 @@ your project using Spring Boot.
 result. Use dependency injection, avoid statics, immutable types, etc…
 - However, keep it simple and to the point. Do not over-engineer. e.g. there is no need
 to add authorization layers.
+
+### [REST API documentation](http://localhost:8080/swagger-ui.html)  

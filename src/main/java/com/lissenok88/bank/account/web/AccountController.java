@@ -52,7 +52,6 @@ public class AccountController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    //@CacheEvict(allEntries = true)
     @Transactional
     public void update(@Valid @RequestBody AccountTo accountTo, @PathVariable int id) {
         log.info("update account {} with id={}", accountTo, id);

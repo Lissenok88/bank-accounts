@@ -1,6 +1,5 @@
 package com.lissenok88.bank.account.to;
 
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.ToString;
@@ -14,6 +13,7 @@ public class AccountTo extends BaseTo {
     String name;
 
     long balance;
+
     @NotBlank
     String pin;
 

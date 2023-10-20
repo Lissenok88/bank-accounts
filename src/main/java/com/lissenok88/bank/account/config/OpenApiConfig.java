@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import io.swagger.v3.oas.annotations.servers.Server;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,9 +23,6 @@ import org.springframework.context.annotation.Configuration;
                 description = "Bank Account Application",
                 contact = @Contact(name = "Lyudmila Ivanyuk", email = "sony_2004@mail.ru")
         ),
-/*        servers = {
-                @Server(url = "${app.host-url}")
-        },*/
         security = @SecurityRequirement(name = "basicAuth")
 )
 @Configuration
